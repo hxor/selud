@@ -21,7 +21,7 @@ class CreateRekening3Table extends Migration
             $table->string('nama');
             $table->timestamps();
 
-            $table->foreign('bumd_id')->references('id')->on('bumd_id');
+            $table->foreign('bumd_id')->references('id')->on('bumd');
             $table->foreign('rekening2_id')->references('id')->on('rekening2');
         });
     }

@@ -16,8 +16,8 @@ class CreateNeracaDetailTable extends Migration
         Schema::create('neraca_detail', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('neraca_id')->unsigned();
-            $table->string('rekening2_id');
-            $table->string('rekening3_id');
+            $table->integer('rekening2_id')->unsigned();
+            $table->integer('rekening3_id')->unsigned();
             $table->bigInteger('nilai');
             $table->timestamps();
 

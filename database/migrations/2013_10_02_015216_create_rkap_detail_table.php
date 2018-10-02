@@ -16,8 +16,8 @@ class CreateRkapDetailTable extends Migration
         Schema::create('rkap_detail', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('rkap_id')->unsigned();
-            $table->string('rekening2_id');
-            $table->string('rekening3_id');
+            $table->integer('rekening2_id')->unsigned();
+            $table->integer('rekening3_id')->unsigned();
             $table->bigInteger('nilai');
             $table->timestamps();
 
