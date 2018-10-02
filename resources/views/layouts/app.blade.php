@@ -56,6 +56,9 @@
                     @yield('content')
                 </div> <!-- content -->
 
+                {{-- Modal --}}
+                @include('layouts.partials._modal')
+
                 <footer class="footer">
                     © {{ date('Y') }}. All rights reserved.
                 </footer>
