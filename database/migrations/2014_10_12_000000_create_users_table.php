@@ -19,11 +19,13 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->integer('role_id')->unsigned();
+            $table->integer('bumd_id')->unsigned()->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('bumd_id')->references('id')->on('bumd');
         });
     }
 
