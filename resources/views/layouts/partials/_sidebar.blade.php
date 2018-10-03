@@ -17,6 +17,9 @@
                             <li>
                                 <a href="{{ route('admin.bumd.index') }}"><span>BUMD</span></a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.pajak.index') }}"><span>Pajak</span></a>
+                            </li>
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><span>Rekening</span>  <span class="menu-arrow"></span></a>
                                 <ul style="">
