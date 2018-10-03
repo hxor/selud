@@ -124,6 +124,9 @@ class NeracaController extends Controller
             ->addColumn('tanggal', function ($model) {
                 return $model->tanggal->format('d/m/Y');
             })
+            ->addColumn('detail', function ($model) {
+                return '<a href="' .route('admin.neraca.detail.index', $model->id). '" class="btn btn-xs btn-primary">Detail</a>';
+            })
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
                     'model' => $model,
@@ -133,6 +136,6 @@ class NeracaController extends Controller
                 ]);
             })
             ->addIndexColumn()
-            ->rawColumns(['action'])->make(true);
+            ->rawColumns(['action', 'detail'])->make(true);
     }
 }

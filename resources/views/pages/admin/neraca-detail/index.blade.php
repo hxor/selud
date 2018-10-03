@@ -4,9 +4,6 @@
     <!-- Datatables -->
     <link href="{{ asset('assets/plugins/datatables/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-
-    {{-- Datepicker --}}
-    <link href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -15,7 +12,7 @@
     <!-- Page-Title -->
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="page-title">Neraca</h4>
+            <h4 class="page-title">Neraca Detail</h4>
             <ol class="breadcrumb">
                 <li>
                     <a href="#">Admin</a>
@@ -24,7 +21,7 @@
                     <a href="#">Pages</a>
                 </li>
                 <li class="active">
-                    Neraca
+                    Neraca Detail
                 </li>
             </ol>
         </div>
@@ -36,7 +33,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                     Datatable
-                    <a href="{{ route('admin.neraca.create') }}" class="btn btn-sm btn-primary btn-custom pull-right waves-effect modal-show" title="Create Resource"><i class="fa fa-plus"></i> Create</a>
+                    <a href="{{ route('admin.neraca.detail.create', $neracaId) }}" class="btn btn-sm btn-primary btn-custom pull-right waves-effect modal-show" title="Create Resource"><i class="fa fa-plus"></i> Create</a>
                     </h3>
                 </div>
                 <div class="panel-body">
@@ -46,11 +43,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>BUMD</th>
-                                <th>Judul</th>
-                                <th>Tanggal</th>
-                                <th>Detail</th>
-                                <th>Status</th>
+                                <th>Kode Rekening</th>
+                                <th>Nama Rekening</th>
+                                <th>Nilai</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -79,14 +74,12 @@
                 responsive: true,
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('table.neraca') }}",
+                ajax: "{{ route('table.neraca.detail', $neracaId) }}",
                 columns: [
                     {data: 'DT_Row_Index', name: 'id'},
-                    {data: 'bumd.nama', name: 'bumd.nama'},
-                    {data: 'judul', name: 'judul'},
-                    {data: 'tanggal', name: 'tanggal'},
-                    {data: 'detail', name: 'detail'},
-                    {data: 'status', name: 'status'},
+                    {data: 'kode_rekening', name: 'kode_rekening'},
+                    {data: 'nama_rekening', name: 'nama_rekening'},
+                    {data: 'nilai', name: 'nilai'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
@@ -95,8 +88,4 @@
 
     <!-- Sweetalert2 -->
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
-
-    {{-- Datepicker --}}
-    <script src="{{ asset('assets/plugins/moment/moment.js') }}"></script>
-    <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 @endpush

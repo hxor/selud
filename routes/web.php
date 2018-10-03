@@ -29,6 +29,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::resource('rekening-3', 'Rekening3Controller');
 
     Route::resource('neraca', 'NeracaController');
+    Route::resource('neraca/{id}/detail', 'NeracaDetailController', ['names' => 'neraca.detail']);
 });
 
 
@@ -42,6 +43,7 @@ Route::group(['prefix' => 'table', 'as' => 'table.', 'middleware' => ['auth']], 
     Route::get('rekening-3', 'Rekening3Controller@dataTable')->name('rekening-3');
 
     Route::get('neraca', 'NeracaController@dataTable')->name('neraca');
+    Route::get('neraca/{id}/detail', 'NeracaDetailController@dataTable')->name('neraca.detail');
 });
 
 /**

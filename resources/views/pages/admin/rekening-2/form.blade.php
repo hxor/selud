@@ -18,7 +18,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('rekening1_id') ? ' has-error' : '' }}">
-                {!! Form::label('rekening1_id', 'BUMD') !!}
+                {!! Form::label('rekening1_id', 'Rekening 1') !!}
                 {!! Form::select('rekening1_id', $rekening1, null, ['id' => 'rekening1_id', 'class' => 'form-control', 'required' => 'required']) !!}
                 <small class="text-danger">{{ $errors->first('rekening1_id') }}</small>
             </div>
