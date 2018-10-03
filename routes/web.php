@@ -21,11 +21,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:admin']], function () {
     Route::resource('user', 'UserController');
+    Route::resource('bumd', 'BumdController');
 });
 
 
 Route::group(['prefix' => 'table', 'as' => 'table.', 'middleware' => ['auth']], function () {
     Route::get('user', 'UserController@dataTable')->name('user');
+    Route::get('bumd', 'BumdController@dataTable')->name('bumd');
 });
 
 /**
