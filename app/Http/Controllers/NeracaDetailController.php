@@ -123,6 +123,13 @@ class NeracaDetailController extends Controller
         $model->delete();
     }
 
+    public function report($neracaId)
+    {
+        $neraca = Neraca::findOrFail($neracaId);
+        $rekening2 = NeracaDetail::select('rekening2_id')->where('neraca_id', $neracaId)->distinct('rekening2_id')->get();
+        return view('pages.admin.neraca-detail.report', compact('rekening2', 'neraca'));
+    }
+
     public function dataTable($id)
     {
         $model = NeracaDetail::where('neraca_id', $id)->with(['rekening3']);

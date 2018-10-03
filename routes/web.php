@@ -30,6 +30,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
 
     Route::resource('neraca', 'NeracaController');
     Route::resource('neraca/{id}/detail', 'NeracaDetailController', ['names' => 'neraca.detail']);
+
+    Route::get('neraca/{id}/report', 'NeracaDetailController@report')->name('neraca.detail.report');
 });
 
 

@@ -34,6 +34,7 @@
                     <h3 class="panel-title">
                     Datatable
                     <a href="{{ route('admin.neraca.detail.create', $neracaId) }}" class="btn btn-sm btn-primary btn-custom pull-right waves-effect modal-show" title="Create Resource"><i class="fa fa-plus"></i> Create</a>
+                    <a href="{{ route('admin.neraca.detail.report', $neracaId) }}" class="btn btn-sm btn-info btn-custom pull-right waves-effect" ><i class="fa fa-print"></i> Report</a>
                     </h3>
                 </div>
                 <div class="panel-body">
