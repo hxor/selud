@@ -12,6 +12,10 @@ class Neraca extends Model
         'bumd_id', 'judul', 'tanggal', 'status'
     ];
 
+    protected $dates = [
+        'tanggal'
+    ];
+
     public function bumd()
     {
         return $this->belongsTo(Bumd::class, 'bumd_id', 'id');

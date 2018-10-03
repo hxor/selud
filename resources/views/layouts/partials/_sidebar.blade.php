@@ -30,6 +30,17 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-folder"></i><span>Laporan </span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('admin.neraca.index') }}"><span>Neraca</span></a>
+                            </li>
+                            <li>
+                                <a href=""><span>RKAP</span></a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="">
                         <a href="{{ route('admin.user.index') }}" class="waves-effect"><i class="ti-user"></i> <span> Users </span></a>
                     </li>
