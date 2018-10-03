@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
 
     Route::resource('rekening-1', 'Rekening1Controller');
     Route::resource('rekening-2', 'Rekening2Controller');
+    Route::resource('rekening-3', 'Rekening3Controller');
 });
 
 
@@ -36,6 +37,7 @@ Route::group(['prefix' => 'table', 'as' => 'table.', 'middleware' => ['auth']], 
 
     Route::get('rekening-1', 'Rekening1Controller@dataTable')->name('rekening-1');
     Route::get('rekening-2', 'Rekening2Controller@dataTable')->name('rekening-2');
+    Route::get('rekening-3', 'Rekening3Controller@dataTable')->name('rekening-3');
 });
 
 /**

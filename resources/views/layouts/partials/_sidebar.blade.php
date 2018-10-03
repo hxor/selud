@@ -25,7 +25,7 @@
                                 <ul style="">
                                     <li><a href="{{ route('admin.rekening-1.index') }}"><span>Rekening 1</span></a></li>
                                     <li><a href="{{ route('admin.rekening-2.index') }}"><span>Rekening 2</span></a></li>
-                                    <li><a href="javascript:void(0);"><span>Rekening 3</span></a></li>
+                                    <li><a href="{{ route('admin.rekening-3.index') }}"><span>Rekening 3</span></a></li>
                                 </ul>
                             </li>
                         </ul>
