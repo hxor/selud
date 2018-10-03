@@ -3,7 +3,7 @@
 @endif
 
 @if ($url_edit != '')
-    <a href="{{ $url_edit }}" class="modal-show"><i class="fa fa-pencil text-inverse"></i></a> |
+    <a href="{{ $url_edit }}" class="btn-edit modal-show"><i class="fa fa-pencil text-inverse"></i></a> |
 @endif
 
 @if ($url_destroy)

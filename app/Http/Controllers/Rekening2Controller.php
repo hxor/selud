@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rekening1;
+use App\Models\Rekening2;
 use DataTables;
 use Illuminate\Http\Request;
 
-class Rekening1Controller extends Controller
+class Rekening2Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class Rekening1Controller extends Controller
      */
     public function index()
     {
-        return view('pages.admin.rekening-1.index');
+        return view('pages.admin.rekening-2.index');
     }
 
     /**
@@ -25,8 +26,9 @@ class Rekening1Controller extends Controller
      */
     public function create()
     {
-        $model = new Rekening1();
-        return view('pages.admin.rekening-1.form', compact('model'));
+        $model = new Rekening2();
+        $rekening1 = Rekening1::pluck('nama', 'id')->all();
+        return view('pages.admin.rekening-2.form', compact('model', 'rekening1'));
     }
 
     /**
@@ -38,11 +40,12 @@ class Rekening1Controller extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'kode' => 'required|unique:rekening1,kode',
+            'kode' => 'required|unique:rekening2,kode',
             'nama' => 'required',
+            'rekening1_id' => 'required',
         ]);
 
-        $model = Rekening1::create($request->all());
+        $model = Rekening2::create($request->all());
 
         return $model;
     }
@@ -55,9 +58,9 @@ class Rekening1Controller extends Controller
      */
     public function show($id)
     {
-        $model = Rekening1::findOrFail($id);
+        $model = Rekening2::findOrFail($id);
 
-        return view('pages.admin.rekening-1.show', compact('model'));
+        return view('pages.admin.rekening-2.show', compact('model'));
     }
 
     /**
@@ -68,9 +71,10 @@ class Rekening1Controller extends Controller
      */
     public function edit($id)
     {
-        $model = Rekening1::findOrFail($id);
+        $model = Rekening2::findOrFail($id);
+        $rekening1 = Rekening1::pluck('nama', 'id')->all();
 
-        return view('pages.admin.rekening-1.form', compact('model'));
+        return view('pages.admin.rekening-2.form', compact('model', 'rekening1'));
     }
 
     /**
@@ -83,11 +87,12 @@ class Rekening1Controller extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'kode' => 'required|unique:rekening1,kode,' . $id,
+            'kode' => 'required|unique:rekening2,kode,' . $id,
             'nama' => 'required',
+            'rekening1_id' => 'required',
         ]);
 
-        $model = Rekening1::findOrfail($id);
+        $model = Rekening2::findOrfail($id);
         $model->update($request->all());
 
         return $model;
@@ -101,20 +106,20 @@ class Rekening1Controller extends Controller
      */
     public function destroy($id)
     {
-        $model = Rekening1::findOrFail($id);
+        $model = Rekening2::findOrFail($id);
         $model->delete();
     }
 
     public function dataTable()
     {
-        $model = Rekening1::query();
+        $model = Rekening2::with('rekening1');
         return DataTables::of($model)
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
                     'model' => $model,
-                    'url_show' => route('admin.rekening-1.show', $model->id),
-                    'url_edit' => route('admin.rekening-1.edit', $model->id),
-                    'url_destroy' => route('admin.rekening-1.destroy', $model->id)
+                    'url_show' => route('admin.rekening-2.show', $model->id),
+                    'url_edit' => route('admin.rekening-2.edit', $model->id),
+                    'url_destroy' => route('admin.rekening-2.destroy', $model->id)
                 ]);
             })
             ->addIndexColumn()

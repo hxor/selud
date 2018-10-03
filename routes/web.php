@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::resource('pajak', 'PajakController');
 
     Route::resource('rekening-1', 'Rekening1Controller');
+    Route::resource('rekening-2', 'Rekening2Controller');
 });
 
 
@@ -32,8 +33,9 @@ Route::group(['prefix' => 'table', 'as' => 'table.', 'middleware' => ['auth']], 
     Route::get('user', 'UserController@dataTable')->name('user');
     Route::get('bumd', 'BumdController@dataTable')->name('bumd');
     Route::get('pajak', 'PajakController@dataTable')->name('pajak');
-    
+
     Route::get('rekening-1', 'Rekening1Controller@dataTable')->name('rekening-1');
+    Route::get('rekening-2', 'Rekening2Controller@dataTable')->name('rekening-2');
 });
 
 /**
