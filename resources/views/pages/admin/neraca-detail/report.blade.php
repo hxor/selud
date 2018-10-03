@@ -34,7 +34,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-striped m-0">
+                    <table class="table table-striped table-bordered m-0">
                         <thead>
                             <tr>
                                 <td style="vertical-align: top; text-align: center;">
@@ -44,14 +44,14 @@
                                     <b>Nama Account</b>
                                 </td>
                                 <td style="vertical-align: top; text-align: center;">
-                                    <b>Bulan Lalu</b>
-                                </td>
-                                <td style="vertical-align: top; text-align: center;">
-                                    <b>Bulan Ini</b>
+                                    <b>Nilai</b>
                                 </td>
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $total = 0;
+                            @endphp
                             @foreach ($rekening2 as $row)
                             <tr>
                                 <td style="vertical-align: top; text-align: center;">
@@ -62,12 +62,9 @@
                                 </td>
                                 <td style="vertical-align: top; text-align: right;"><br>
                                 </td>
-                                <td style="vertical-align: top; text-align: right;"><br>
-                                </td>
                             </tr>
                             @php
                                 $jumlah = 0;
-                                $total = 0;
                             @endphp
                             @foreach (\App\Models\NeracaDetail::where('rekening2_id', $row->rekening2->id)->where('neraca_id', $neraca->id)->get() as $rekening)
                             <tr>
@@ -76,8 +73,6 @@
                                 </td>
                                 <td style="vertical-align: top;">
                                     {{ $rekening->rekening3->nama }}
-                                </td>
-                                <td style="vertical-align: top; text-align: right;"><br>
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
                                     Rp{{ number_format($rekening->nilai, '2', ',', '.') }}
@@ -94,14 +89,12 @@
                                 <td style="vertical-align: top;">
                                     <b>Jumlah {{ $row->rekening2->nama }}</b>
                                 </td>
-                                <td style="vertical-align: top; text-align: right;"><br>
-                                </td>
                                 <td style="vertical-align: top; text-align: right;">
                                     Rp{{ number_format($jumlah, '2', ',', '.') }}
                                 </td>
                             </tr>
                             @php
-                                $jumlah = 0;
+                                $total += $jumlah;
                             @endphp
                             @endforeach
                             <tr>
@@ -110,8 +103,6 @@
                                 </td>
                                 <td style="vertical-align: top;">
                                     <b>Total</b>
-                                </td>
-                                <td style="vertical-align: top; text-align: right;"><br>
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
                                     Rp{{ number_format($total, '2', ',', '.') }}
