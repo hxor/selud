@@ -73,6 +73,7 @@
                             @php
                                 $jumlah = 0;
                                 $lastJumlah = 0;
+                                $lastNeracaDetail = 0;
                             @endphp
                                 @foreach (\App\Models\NeracaDetail::where('rekening2_id', $row->rekening2->id)->where('neraca_id', $neraca->id)->get() as $rekening)
                                 <tr>

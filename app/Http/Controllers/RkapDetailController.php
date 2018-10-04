@@ -8,6 +8,7 @@ use App\Models\Rekening3;
 use App\Models\Bumd;
 use App\Models\Rkap;
 use App\Models\RkapDetail;
+use Carbon\Carbon;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -126,8 +127,9 @@ class RkapDetailController extends Controller
     public function report($rkapId)
     {
         $rkap = Rkap::findOrFail($rkapId);
+        $lastRkap = Rkap::whereYear('tanggal', Carbon::parse($rkap->tanggal)->subYear()->year)->first();
         $rekening2 = RkapDetail::select('rekening2_id')->where('rkap_id', $rkapId)->distinct('rekening2_id')->get();
-        return view('pages.admin.rkap-detail.report', compact('rekening2', 'rkap'));
+        return view('pages.admin.rkap-detail.report', compact('rekening2', 'rkap', 'lastRkap'));
     }
 
     public function dataTable($id)
