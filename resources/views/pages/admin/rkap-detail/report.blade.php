@@ -10,7 +10,7 @@
     <!-- Page-Title -->
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="page-title">Neraca Detail</h4>
+            <h4 class="page-title">RKAP Detail</h4>
             <ol class="breadcrumb">
                 <li>
                     <a href="#">Admin</a>
@@ -19,7 +19,7 @@
                     <a href="#">Pages</a>
                 </li>
                 <li class="active">
-                    Neraca Detail
+                    RKAP Detail
                 </li>
             </ol>
         </div>
@@ -30,7 +30,7 @@
             <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                    Neraca : {{ $neraca->bumd->nama }}
+                    RKAP : {{ $rkap->bumd->nama }}
                     </h3>
                 </div>
                 <div class="panel-body">
@@ -44,13 +44,13 @@
                                     <b>Nama Account</b>
                                 </td>
                                 <td style="vertical-align: top; text-align: center;">
-                                    <b>Bulan Ini</b>
+                                    <b>Tahun Ini</b>
                                 </td>
                             </tr>
                         </thead>
                         <tbody>
                             @php
-                                $total = [];
+                                $arr = [];
                             @endphp
                             @foreach ($rekening2 as $row)
                             <tr>
@@ -63,30 +63,27 @@
                                 <td style="vertical-align: top; text-align: right;"><br>
                                 </td>
                             </tr>
-
                             @php
                                 $jumlah = 0;
                             @endphp
-                                @foreach (\App\Models\NeracaDetail::where('rekening2_id', $row->rekening2->id)->where('neraca_id', $neraca->id)->get() as $rekening)
-                                <tr>
-                                    <td style="vertical-align: top; text-align: center;">
-                                        {{ $rekening->parent->bumd->id . '.' . $rekening->rekening2->kode . '.' . $rekening->rekening3->kode }}
-                                    </td>
-                                    <td style="vertical-align: top;">
-                                        {{ $rekening->rekening3->nama }}
-                                    </td>
-                                    <td style="vertical-align: top; text-align: right;">
-                                        Rp{{ number_format($rekening->nilai, '2', ',', '.') }}
-                                    </td>
-                                </tr>
-
-                                @php
-                                    $jumlah += $rekening->nilai;
-                                @endphp
-                                @endforeach
+                            @foreach (\App\Models\RKAPDetail::where('rekening2_id', $row->rekening2->id)->where('rkap_id', $rkap->id)->get() as $rekening)
                             <tr>
                                 <td style="vertical-align: top; text-align: center;">
-
+                                    {{ $rekening->parent->bumd->id . '.' . $rekening->rekening2->kode . '.' . $rekening->rekening3->kode }}
+                                </td>
+                                <td style="vertical-align: top;">
+                                    {{ $rekening->rekening3->nama }}
+                                </td>
+                                <td style="vertical-align: top; text-align: right;">
+                                    Rp{{ number_format($rekening->nilai, '2', ',', '.') }}
+                                </td>
+                            </tr>
+                            @php
+                                $jumlah += $rekening->nilai;
+                            @endphp
+                            @endforeach
+                            <tr>
+                                <td style="vertical-align: top; text-align: center;">
                                 </td>
                                 <td style="vertical-align: top;">
                                     <b>Jumlah {{ $row->rekening2->nama }}</b>
@@ -95,21 +92,49 @@
                                     Rp{{ number_format($jumlah, '2', ',', '.') }}
                                 </td>
                             </tr>
-
                             @php
-                                array_push($total, $jumlah);
+                                array_push($arr, $jumlah);
                             @endphp
                             @endforeach
-
                             <tr>
                                 <td style="vertical-align: top; text-align: center;">
 
                                 </td>
                                 <td style="vertical-align: top;">
-                                    <b>Total</b>
+                                    <b>Laba Rugi Sebelum Pajak</b>
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
-                                    Rp{{ number_format(array_sum($total), '2', ',', '.') }}
+                                    Rp{{ number_format($laba = ($arr[0] - $arr[1]), '2', ',', '.') }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top; text-align: center;">
+
+                                </td>
+                                <td style="vertical-align: top;">
+                                    <b>Pajak Penghasilan</b>
+                                </td>
+                                <td style="vertical-align: top; text-align: right;">
+                                    <?php
+                                        $pajak = 5;
+                                        $hasilPajak = ($pajak * $laba)/100;
+                                    ?>
+                                    Rp{{ number_format($hasilPajak, '2', ',', '.') }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top; text-align: center;">
+
+                                </td>
+                                <td style="vertical-align: top;">
+                                    <b>Pajak Penghasilan</b>
+                                </td>
+                                <td style="vertical-align: top; text-align: right;">
+                                    <?php
+                                        $pajak = 5;
+                                        $labaPajak = ($laba-$hasilPajak);
+                                    ?>
+                                    Rp{{ number_format($labaPajak, '2', ',', '.') }}
                                 </td>
                             </tr>
                         </tbody>

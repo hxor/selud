@@ -52,6 +52,7 @@ Route::group(['prefix' => 'table', 'as' => 'table.', 'middleware' => ['auth']], 
     Route::get('neraca/{id}/detail', 'NeracaDetailController@dataTable')->name('neraca.detail');
 
     Route::get('rkap', 'RkapController@dataTable')->name('rkap');
+    Route::get('rkap/{id}/detail', 'RkapDetailController@dataTable')->name('rkap.detail');
 });
 
 /**

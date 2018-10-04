@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rekening1;
+use App\Models\Rekening2;
+use App\Models\Rekening3;
+use App\Models\Bumd;
+use App\Models\Rkap;
+use App\Models\RkapDetail;
+use DataTables;
 use Illuminate\Http\Request;
 
 class RkapDetailController extends Controller
@@ -11,9 +18,9 @@ class RkapDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($rkapId)
     {
-        //
+        return view('pages.admin.rkap-detail.index', compact('rkapId'));
     }
 
     /**
@@ -21,9 +28,12 @@ class RkapDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($rkapId)
     {
-        //
+        $model = new RkapDetail();
+        $rkap = Rkap::findOrFail($rkapId);
+        $rekening3 = Rekening3::where('bumd_id', $rkap->bumd->id)->pluck('nama', 'id');
+        return view('pages.admin.rkap-detail.form', compact('model', 'rkap', 'rekening3'));
     }
 
     /**
@@ -32,9 +42,21 @@ class RkapDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $rkapId)
     {
-        //
+        $this->validate($request, [
+            'rekening3_id' => 'required',
+            'nilai' => 'required'
+        ]);
+
+        $rekening3 = Rekening3::findOrFail($request->rekening3_id);
+
+        $request['rkap_id'] = $rkapId;
+        $request['rekening2_id'] = $rekening3->rekening2->id;
+
+        $model = RkapDetail::create($request->all());
+
+        return $model;
     }
 
     /**
@@ -43,9 +65,10 @@ class RkapDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($rkapId, $id)
     {
-        //
+        $model = RkapDetail::findOrFail($id);
+        return view('pages.admin.rkap-detail.show', compact('model'));
     }
 
     /**
@@ -54,9 +77,12 @@ class RkapDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($rkapId, $id)
     {
-        //
+        $model = RkapDetail::findOrFail($id);
+        $rkap = Rkap::findOrFail($rkapId);
+        $rekening3 = Rekening3::where('bumd_id', $rkap->bumd->id)->pluck('nama', 'id');
+        return view('pages.admin.rkap-detail.form', compact('model', 'rkap', 'rekening3'));
     }
 
     /**
@@ -66,9 +92,23 @@ class RkapDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $rkapId, $id)
     {
-        //
+        $this->validate($request, [
+            'rekening3_id' => 'required',
+            'nilai' => 'required'
+        ]);
+
+        $model = RkapDetail::findOrFail($id);
+
+        $rekening3 = Rekening3::findOrFail($request->rekening3_id);
+
+        $request['rkap_id'] = $rkapId;
+        $request['rekening2_id'] = $rekening3->rekening2->id;
+
+        $model->update($request->all());
+
+        return $model;
     }
 
     /**
@@ -77,18 +117,38 @@ class RkapDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($rkapId, $id)
     {
-        //
+        $model = RkapDetail::findOrFail($id);
+        $model->delete();
     }
 
-    public function report()
+    public function report($rkapId)
     {
-        //
+        $rkap = Rkap::findOrFail($rkapId);
+        $rekening2 = RkapDetail::select('rekening2_id')->where('rkap_id', $rkapId)->distinct('rekening2_id')->get();
+        return view('pages.admin.rkap-detail.report', compact('rekening2', 'rkap'));
     }
 
-    public function dataTable()
+    public function dataTable($id)
     {
-
+        $model = RkapDetail::where('rkap_id', $id)->with(['rekening3']);
+        return DataTables::of($model)
+            ->addColumn('kode_rekening', function ($model) {
+                return $model->parent->bumd->id . '.' . $model->rekening2->kode . '.' . $model->rekening3->kode;
+            })
+            ->addColumn('nama_rekening', function ($model) {
+                return $model->rekening3->nama;
+            })
+            ->addColumn('action', function ($model) use ($id) {
+                return view('layouts.partials._action', [
+                    'model' => $model,
+                    'url_show' => route('admin.rkap.detail.show', [$id, $model->id]),
+                    'url_edit' => route('admin.rkap.detail.edit', [$id, $model->id]),
+                    'url_destroy' => route('admin.rkap.detail.destroy', [$id, $model->id])
+                ]);
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action', 'detail'])->make(true);
     }
 }
