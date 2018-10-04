@@ -44,6 +44,9 @@
                                     <b>Nama Account</b>
                                 </td>
                                 <td style="vertical-align: top; text-align: center;">
+                                    <b>Bulan Lalu</b>
+                                </td>
+                                <td style="vertical-align: top; text-align: center;">
                                     <b>Bulan Ini</b>
                                 </td>
                             </tr>
@@ -51,6 +54,7 @@
                         <tbody>
                             @php
                                 $total = [];
+                                $lastTotal = [];
                             @endphp
                             @foreach ($rekening2 as $row)
                             <tr>
@@ -62,10 +66,13 @@
                                 </td>
                                 <td style="vertical-align: top; text-align: right;"><br>
                                 </td>
+                                <td style="vertical-align: top; text-align: right;"><br>
+                                </td>
                             </tr>
 
                             @php
                                 $jumlah = 0;
+                                $lastJumlah = 0;
                             @endphp
                                 @foreach (\App\Models\NeracaDetail::where('rekening2_id', $row->rekening2->id)->where('neraca_id', $neraca->id)->get() as $rekening)
                                 <tr>
@@ -76,12 +83,20 @@
                                         {{ $rekening->rekening3->nama }}
                                     </td>
                                     <td style="vertical-align: top; text-align: right;">
+                                        @if ($lastNeraca)
+                                            Rp{{ number_format($lastNeracaDetail = $lastNeraca->detail()->where('rekening3_id', $rekening->rekening3_id)->first()->nilai, '2', ',', '.') }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                    <td style="vertical-align: top; text-align: right;">
                                         Rp{{ number_format($rekening->nilai, '2', ',', '.') }}
                                     </td>
                                 </tr>
 
                                 @php
                                     $jumlah += $rekening->nilai;
+                                    $lastJumlah += $lastNeracaDetail;
                                 @endphp
                                 @endforeach
                             <tr>
@@ -92,12 +107,16 @@
                                     <b>Jumlah {{ $row->rekening2->nama }}</b>
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
+                                    Rp{{ number_format($lastJumlah, '2', ',', '.') }}
+                                </td>
+                                <td style="vertical-align: top; text-align: right;">
                                     Rp{{ number_format($jumlah, '2', ',', '.') }}
                                 </td>
                             </tr>
 
                             @php
                                 array_push($total, $jumlah);
+                                array_push($lastTotal, $lastJumlah);
                             @endphp
                             @endforeach
 
@@ -107,6 +126,9 @@
                                 </td>
                                 <td style="vertical-align: top;">
                                     <b>Total</b>
+                                </td>
+                                <td style="vertical-align: top; text-align: right;">
+                                    Rp{{ number_format(array_sum($lastTotal), '2', ',', '.') }}
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
                                     Rp{{ number_format(array_sum($total), '2', ',', '.') }}

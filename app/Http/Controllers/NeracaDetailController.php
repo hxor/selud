@@ -9,6 +9,7 @@ use App\Models\Bumd;
 use App\Models\Neraca;
 use App\Models\NeracaDetail;
 use DataTables;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class NeracaDetailController extends Controller
@@ -126,8 +127,10 @@ class NeracaDetailController extends Controller
     public function report($neracaId)
     {
         $neraca = Neraca::findOrFail($neracaId);
+        $lastNeraca = Neraca::whereMonth('tanggal', Carbon::parse($neraca->tanggal)->subMonth()->month)->first();
+
         $rekening2 = NeracaDetail::select('rekening2_id')->where('neraca_id', $neracaId)->distinct('rekening2_id')->get();
-        return view('pages.admin.neraca-detail.report', compact('rekening2', 'neraca'));
+        return view('pages.admin.neraca-detail.report', compact('rekening2', 'neraca', 'lastNeraca'));
     }
 
     public function dataTable($id)
