@@ -30,8 +30,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
 
     Route::resource('neraca', 'NeracaController');
     Route::resource('neraca/{id}/detail', 'NeracaDetailController', ['names' => 'neraca.detail']);
-
     Route::get('neraca/{id}/report', 'NeracaDetailController@report')->name('neraca.detail.report');
+
+
+    Route::resource('rkap', 'RkapController');
+    Route::resource('rkap/{id}/detail', 'RkapDetailController', ['names' => 'rkap.detail']);
+    Route::get('rkap/{id}/report', 'RkapDetailController@report')->name('rkap.detail.report');
 });
 
 
@@ -46,6 +50,8 @@ Route::group(['prefix' => 'table', 'as' => 'table.', 'middleware' => ['auth']], 
 
     Route::get('neraca', 'NeracaController@dataTable')->name('neraca');
     Route::get('neraca/{id}/detail', 'NeracaDetailController@dataTable')->name('neraca.detail');
+
+    Route::get('rkap', 'RkapController@dataTable')->name('rkap');
 });
 
 /**

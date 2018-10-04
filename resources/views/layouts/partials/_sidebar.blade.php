@@ -37,7 +37,7 @@
                                 <a href="{{ route('admin.neraca.index') }}"><span>Neraca</span></a>
                             </li>
                             <li>
-                                <a href=""><span>RKAP</span></a>
+                                <a href="{{ route('admin.rkap.index') }}"><span>RKAP</span></a>
                             </li>
                         </ul>
                     </li>
