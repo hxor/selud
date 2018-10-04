@@ -19,14 +19,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:admin']], function () {
-    Route::resource('user', 'UserController');
-    Route::resource('bumd', 'BumdController');
-    Route::resource('pajak', 'PajakController');
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
+    Route::group(['middleware' => 'role:admin'], function () {
+        Route::resource('user', 'UserController');
+        Route::resource('bumd', 'BumdController');
+        Route::resource('pajak', 'PajakController');
 
-    Route::resource('rekening-1', 'Rekening1Controller');
-    Route::resource('rekening-2', 'Rekening2Controller');
-    Route::resource('rekening-3', 'Rekening3Controller');
+        Route::resource('rekening-1', 'Rekening1Controller');
+        Route::resource('rekening-2', 'Rekening2Controller');
+        Route::resource('rekening-3', 'Rekening3Controller');
+    });
+
 
     Route::resource('neraca', 'NeracaController');
     Route::resource('neraca/{id}/detail', 'NeracaDetailController', ['names' => 'neraca.detail']);

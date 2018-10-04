@@ -30,7 +30,11 @@ class RkapController extends Controller
     public function create()
     {
         $model = new Rkap();
-        $bumd = Bumd::pluck('nama', 'id')->all();
+        if (request()->user()->roles->role == 'admin') {
+            $bumd = Bumd::pluck('nama', 'id')->all();
+        } else {
+            $bumd = Bumd::where('id', request()->user()->bumd_id)->pluck('nama', 'id')->all();
+        }
         return view('pages.admin.rkap.form', compact('model', 'bumd'));
     }
 
@@ -76,7 +80,11 @@ class RkapController extends Controller
     public function edit($id)
     {
         $model = Rkap::findOrFail($id);
-        $bumd = Bumd::pluck('nama', 'id')->all();
+        if (request()->user()->roles->role == 'admin') {
+            $bumd = Bumd::pluck('nama', 'id')->all();
+        } else {
+            $bumd = Bumd::where('id', request()->user()->bumd_id)->pluck('nama', 'id')->all();
+        }
         return view('pages.admin.rkap.form', compact('model', 'bumd'));
     }
 
@@ -116,7 +124,12 @@ class RkapController extends Controller
 
     public function dataTable()
     {
-        $model = Rkap::with('bumd');
+        if (request()->user()->roles->role == 'admin') {
+            $model = Rkap::with('bumd');
+        } else {
+            $model = Rkap::where('bumd_id', request()->user()->bumd_id)->with('bumd');
+        }
+
         return DataTables::of($model)
             ->addColumn('status', function ($model) {
                 return $model->status ? 'Selesai' : 'Belum';

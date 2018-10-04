@@ -9,6 +9,17 @@
                 <li class="">
                     <a href="{{ route('home') }}" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>
                 </li>
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-folder"></i><span>Laporan </span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.neraca.index') }}"><span>Neraca</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.rkap.index') }}"><span>RKAP</span></a>
+                        </li>
+                    </ul>
+                </li>
 
                 @if (Auth::user()->roles->role == 'admin')
                     <li class="has_sub">
