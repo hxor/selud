@@ -25,7 +25,7 @@
 
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                 {!! Form::label('password', 'Password') !!}
-                {!! Form::password('password', ['id' => 'password', 'class' => 'form-control', 'required' => 'required']) !!}
+                {!! Form::password('password', ['id' => 'password', 'class' => 'form-control']) !!}
                 <small class="text-danger">{{ $errors->first('password') }}</small>
             </div>
 

@@ -39,6 +39,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('rkap', 'RkapController');
     Route::resource('rkap/{id}/detail', 'RkapDetailController', ['names' => 'rkap.detail']);
     Route::get('rkap/{id}/report', 'RkapDetailController@report')->name('rkap.detail.report');
+
+
+    Route::get('/profile', 'ProfileController@index')->name('profile.index');
+    Route::put('/profile/update', 'ProfileController@update')->name('profile.update');
 });
 
 
