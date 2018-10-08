@@ -21,7 +21,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                {!! Form::label('status', 'Telepon') !!}
+                {!! Form::label('status', 'Status') !!}
                 {!! Form::select('status', [0 => 'Belum Selesai', 1 => 'Selesai'],null, ['id' => 'status', 'class' => 'form-control', 'required' => 'required']) !!}
                 <small class="text-danger">{{ $errors->first('status') }}</small>
             </div>
