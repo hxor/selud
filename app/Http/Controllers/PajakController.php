@@ -43,6 +43,16 @@ class PajakController extends Controller
             'status' => 'required',
         ]);
 
+        if ($request->status == 1) {
+            $pajak = Pajak::where('status',1 )->first();
+
+            if ($pajak) {
+                $pajak->update([
+                    'status' => 0
+                ]);
+            }
+        }
+
         $model = Pajak::create($request->all());
 
         return $model;
@@ -88,6 +98,16 @@ class PajakController extends Controller
             'nilai' => 'required',
             'status' => 'required',
         ]);
+
+        if ($request->status == 1) {
+            $pajak = Pajak::where('status',1 )->first();
+
+            if ($pajak) {
+                $pajak->update([
+                    'status' => 0
+                ]);
+            }
+        }
 
         $model = Pajak::findOrfail($id);
         $model->update($request->all());
