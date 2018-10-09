@@ -55,8 +55,10 @@
                             @php
                                 $total = [];
                                 $lastTotal = [];
+                                $no = -1;
                             @endphp
                             @foreach ($rekening2 as $row)
+                            @php $no++; @endphp
                             <tr>
                                 <td style="vertical-align: top; text-align: center;">
                                     <b>{{ $row->rekening2->kode }}</b>
@@ -119,22 +121,42 @@
                                 array_push($total, $jumlah);
                                 array_push($lastTotal, $lastJumlah);
                             @endphp
+
+                            @if ($no == 1)
+                                <tr>
+                                    <td style="vertical-align: top; text-align: center;">
+                                        -
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <b>Jumlah Asset</b>
+                                    </td>
+                                    <td style="vertical-align: top; text-align: right;">
+                                        <b>Rp{{ number_format($lastTotal[0] + $lastTotal[1], '2', ',', '.') }}</b>
+                                    </td>
+                                    <td style="vertical-align: top; text-align: right;">
+                                        <b>Rp{{ number_format($total[0] + $total[1], '2', ',', '.') }}</b>
+                                    </td>
+                                </tr>
+                            @endif
+
+                            @if ($no == 4)
+                                <tr>
+                                    <td style="vertical-align: top; text-align: center;">
+                                        -
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <b>Jumlah Kewajiban dan Ekuitas</b>
+                                    </td>
+                                    <td style="vertical-align: top; text-align: right;">
+                                        <b>Rp{{ number_format($lastTotal[2] + $lastTotal[3] + $lastTotal[4], '2', ',', '.') }}</b>
+                                    </td>
+                                    <td style="vertical-align: top; text-align: right;">
+                                        <b>Rp{{ number_format($total[2] + $total[3] + $total[4], '2', ',', '.') }}</b>
+                                    </td>
+                                </tr>
+                            @endif
+
                             @endforeach
-
-                            <tr>
-                                <td style="vertical-align: top; text-align: center;">
-
-                                </td>
-                                <td style="vertical-align: top;">
-                                    <b>Total</b>
-                                </td>
-                                <td style="vertical-align: top; text-align: right;">
-                                    Rp{{ number_format(array_sum($lastTotal), '2', ',', '.') }}
-                                </td>
-                                <td style="vertical-align: top; text-align: right;">
-                                    Rp{{ number_format(array_sum($total), '2', ',', '.') }}
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
