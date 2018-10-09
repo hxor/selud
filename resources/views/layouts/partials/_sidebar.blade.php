@@ -10,17 +10,43 @@
                     <a href="{{ route('home') }}" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>
                 </li>
                 @if (Auth::user()->roles->role == 'user')
+
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-folder"></i><span>Laporan </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>RKAP </span> <span class="menu-arrow"></span></a>
                         <ul>
                             <li>
-                                <a href="{{ route('admin.neraca.index') }}"><span>Neraca</span></a>
+                                <a href="{{ route('admin.rkap.index') }}"><span>Input</span></a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.rkap.index') }}"><span>RKAP</span></a>
+                                <a href="#"><span>Laporan</span></a>
                             </li>
                         </ul>
                     </li>
+
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>Neraca </span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('admin.neraca.index') }}"><span>Input</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span>Laporan</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>Laba/Rugi </span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li>
+                                <a href="#"><span>Input</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span>Laporan</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
                 @endif
 
                 @if (Auth::user()->roles->role == 'admin')
@@ -43,17 +69,43 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-folder"></i><span>Laporan </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>RKAP </span> <span class="menu-arrow"></span></a>
                         <ul>
                             <li>
-                                <a href="{{ route('admin.neraca.index') }}"><span>Neraca</span></a>
+                                <a href="{{ route('admin.rkap.index') }}"><span>Input</span></a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.rkap.index') }}"><span>RKAP</span></a>
+                                <a href="#"><span>Laporan</span></a>
                             </li>
                         </ul>
                     </li>
+
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>Neraca </span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('admin.neraca.index') }}"><span>Input</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span>Laporan</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>Laba/Rugi </span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li>
+                                <a href="#"><span>Input</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span>Laporan</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="">
                         <a href="{{ route('admin.user.index') }}" class="waves-effect"><i class="ti-user"></i> <span> Users </span></a>
                     </li>
