@@ -40,6 +40,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('rkap/{id}/detail', 'RkapDetailController', ['names' => 'rkap.detail']);
     Route::get('rkap/{id}/report', 'RkapDetailController@report')->name('rkap.detail.report');
 
+    Route::resource('larugi', 'LarugiController');
+    Route::resource('larugi/{id}/detail', 'LarugiDetailController', ['names' => 'larugi.detail']);
+    Route::get('larugi/{id}/report', 'LarugiDetailController@report')->name('larugi.detail.report');
+
 
     Route::get('/profile', 'ProfileController@index')->name('profile.index');
     Route::put('/profile/update', 'ProfileController@update')->name('profile.update');
@@ -57,6 +61,9 @@ Route::group(['prefix' => 'table', 'as' => 'table.', 'middleware' => ['auth']], 
 
     Route::get('neraca', 'NeracaController@dataTable')->name('neraca');
     Route::get('neraca/{id}/detail', 'NeracaDetailController@dataTable')->name('neraca.detail');
+
+    Route::get('larugi', 'LarugiController@dataTable')->name('larugi');
+    Route::get('larugi/{id}/detail', 'LarugiDetailController@dataTable')->name('larugi.detail');
 
     Route::get('rkap', 'RkapController@dataTable')->name('rkap');
     Route::get('rkap/{id}/detail', 'RkapDetailController@dataTable')->name('rkap.detail');

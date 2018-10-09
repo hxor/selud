@@ -39,7 +39,7 @@
                         <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>Laba/Rugi </span> <span class="menu-arrow"></span></a>
                         <ul>
                             <li>
-                                <a href="#"><span>Input</span></a>
+                                <a href="{{ route('admin.larugi.index') }}"><span>Input</span></a>
                             </li>
                             <li>
                                 <a href="#"><span>Laporan</span></a>
@@ -69,7 +69,7 @@
                             </li>
                         </ul>
                     </li>
-                    
+
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>RKAP </span> <span class="menu-arrow"></span></a>
                         <ul>
@@ -98,7 +98,7 @@
                         <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>Laba/Rugi </span> <span class="menu-arrow"></span></a>
                         <ul>
                             <li>
-                                <a href="#"><span>Input</span></a>
+                                <a href="{{ route('admin.larugi.index') }}"><span>Input</span></a>
                             </li>
                             <li>
                                 <a href="#"><span>Laporan</span></a>

@@ -10,7 +10,7 @@
     <!-- Page-Title -->
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="page-title">RKAP Detail</h4>
+            <h4 class="page-title">Laba/Rugi Detail</h4>
             <ol class="breadcrumb">
                 <li>
                     <a href="#">Admin</a>
@@ -19,7 +19,7 @@
                     <a href="#">Pages</a>
                 </li>
                 <li class="active">
-                    RKAP Detail
+                    Laba/Rugi Detail
                 </li>
             </ol>
         </div>
@@ -30,7 +30,7 @@
             <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                    RKAP : {{ $rkap->bumd->nama }}
+                    Laba/Rugi : {{ $larugi->bumd->nama }}
                     </h3>
                 </div>
                 <div class="panel-body">
@@ -44,10 +44,10 @@
                                     <b>Nama Account</b>
                                 </td>
                                 <td style="vertical-align: top; text-align: center;">
-                                    <b>Tahun Ini</b>
+                                    <b>Bulan Ini</b>
                                 </td>
                                 <td style="vertical-align: top; text-align: center;">
-                                    <b>Tahun Lalu</b>
+                                    <b>Bulan Lalu</b>
                                 </td>
                             </tr>
                         </thead>
@@ -73,9 +73,9 @@
                             @php
                                 $jumlah = 0;
                                 $lastJumlah = 0;
-                                $lastRkapDetail = 0;
+                                $lastLarugiDetail = 0;
                             @endphp
-                            @foreach (\App\Models\RkapDetail::where('rekening2_id', $row->rekening2->id)->where('rkap_id', $rkap->id)->get() as $rekening)
+                            @foreach (\App\Models\LarugiDetail::where('rekening2_id', $row->rekening2->id)->where('larugi_id', $larugi->id)->get() as $rekening)
                             <tr>
                                 <td style="vertical-align: top; text-align: center;">
                                     {{ $rekening->parent->bumd->id . '.' . $rekening->rekening2->kode . '.' . $rekening->rekening3->kode }}
@@ -87,8 +87,8 @@
                                     Rp{{ number_format($rekening->nilai, '2', ',', '.') }}
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
-                                    @if ($lastRkap)
-                                        Rp{{ number_format($lastRkapDetail = $lastRkap->detail()->where('rekening3_id', $rekening->rekening3_id)->first()->nilai, '2', ',', '.') }}
+                                    @if ($lastLarugi)
+                                        Rp{{ number_format($lastLarugiDetail = $lastLarugi->detail()->where('rekening3_id', $rekening->rekening3_id)->first()->nilai, '2', ',', '.') }}
                                     @else
                                         -
                                     @endif
@@ -96,7 +96,7 @@
                             </tr>
                             @php
                                 $jumlah += $rekening->nilai;
-                                $lastJumlah += $lastRkapDetail;
+                                $lastJumlah += $lastLarugiDetail;
                             @endphp
                             @endforeach
                             <tr>
