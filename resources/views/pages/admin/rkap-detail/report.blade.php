@@ -55,6 +55,7 @@
                             @php
                                 $total = [];
                                 $lastTotal = [];
+                                $pajak = App\Models\Pajak::where('status', 1)->first()->nilai;
                             @endphp
                             @foreach ($rekening2 as $row)
                             <tr>
@@ -139,14 +140,13 @@
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
                                     <?php
-                                        $pajak = 5;
                                         $hasilPajak = ($pajak * $laba)/100;
                                     ?>
                                     Rp{{ number_format($hasilPajak, '2', ',', '.') }}
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
                                     <?php
-                                        $pajak = 5;
+
                                         $lastHasilPajak = ($pajak * $lastLaba)/100;
                                     ?>
                                     Rp{{ number_format($lastHasilPajak, '2', ',', '.') }}
@@ -161,14 +161,14 @@
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
                                     <?php
-                                        $pajak = 5;
+
                                         $labaPajak = ($laba-$hasilPajak);
                                     ?>
                                     Rp{{ number_format($labaPajak, '2', ',', '.') }}
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
                                     <?php
-                                        $pajak = 5;
+
                                         $lastLabaPajak = ($lastLaba-$lastHasilPajak);
                                     ?>
                                     Rp{{ number_format($lastLabaPajak, '2', ',', '.') }}
