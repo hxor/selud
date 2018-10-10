@@ -11,41 +11,41 @@
                 </li>
                 @if (Auth::user()->roles->role == 'user')
 
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>RKAP </span> <span class="menu-arrow"></span></a>
-                        <ul>
-                            <li>
-                                <a href="{{ route('admin.rkap.index') }}"><span>Input</span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>Laporan</span></a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>RKAP </span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.rkap.index') }}"><span>Input</span></a>
+                        </li>
+                        <li>
+                            <a href="{{  route('admin.rkap.report.search') }}"><span>Laporan</span></a>
+                        </li>
+                    </ul>
+                </li>
 
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>Neraca </span> <span class="menu-arrow"></span></a>
-                        <ul>
-                            <li>
-                                <a href="{{ route('admin.neraca.index') }}"><span>Input</span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>Laporan</span></a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>Neraca </span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.neraca.index') }}"><span>Input</span></a>
+                        </li>
+                        <li>
+                            <a href="{{  route('admin.neraca.report.search') }}"><span>Laporan</span></a>
+                        </li>
+                    </ul>
+                </li>
 
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>Laba/Rugi </span> <span class="menu-arrow"></span></a>
-                        <ul>
-                            <li>
-                                <a href="{{ route('admin.larugi.index') }}"><span>Input</span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>Laporan</span></a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i><span>Laba/Rugi </span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.larugi.index') }}"><span>Input</span></a>
+                        </li>
+                        <li>
+                            <a href="{{  route('admin.larugi.report.search') }}"><span>Laporan</span></a>
+                        </li>
+                    </ul>
+                </li>
 
                 @endif
 
@@ -77,7 +77,7 @@
                                 <a href="{{ route('admin.rkap.index') }}"><span>Input</span></a>
                             </li>
                             <li>
-                                <a href="#"><span>Laporan</span></a>
+                                <a href="{{  route('admin.rkap.report.search') }}"><span>Laporan</span></a>
                             </li>
                         </ul>
                     </li>
@@ -89,7 +89,7 @@
                                 <a href="{{ route('admin.neraca.index') }}"><span>Input</span></a>
                             </li>
                             <li>
-                                <a href="#"><span>Laporan</span></a>
+                                <a href="{{  route('admin.neraca.report.search') }}"><span>Laporan</span></a>
                             </li>
                         </ul>
                     </li>
@@ -101,7 +101,7 @@
                                 <a href="{{ route('admin.larugi.index') }}"><span>Input</span></a>
                             </li>
                             <li>
-                                <a href="#"><span>Laporan</span></a>
+                                <a href="{{  route('admin.larugi.report.search') }}"><span>Laporan</span></a>
                             </li>
                         </ul>
                     </li>

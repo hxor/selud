@@ -151,4 +151,43 @@ class LarugiController extends Controller
             ->addIndexColumn()
             ->rawColumns(['action', 'detail'])->make(true);
     }
+
+    public function formReport()
+    {
+        if (request()->user()->roles->role == 'admin') {
+            $bumd = Bumd::pluck('nama', 'id')->all();
+        } else {
+            $bumd = Bumd::where('id', request()->user()->bumd_id)->pluck('nama', 'id')->all();
+        }
+        return view('pages.admin.larugi.search', compact('bumd'));
+    }
+
+
+    public function indexReport(Request $request)
+    {
+        $month = $request->month;
+        $year = $request->year;
+        $bumd = $request->bumd_id;
+
+        return view('pages.admin.larugi.result', compact('month', 'year', 'bumd'));
+    }
+
+    public function reportDataTable($bumd, $bulan, $tahun)
+    {
+        if (request()->user()->roles->role == 'admin') {
+            $model = Larugi::where('bumd_id', $bumd)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->with('bumd');
+        } else {
+            $model = Larugi::where('bumd_id', request()->user()->bumd_id)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->with('bumd');
+        }
+
+        return DataTables::of($model)
+            ->addColumn('tanggal', function ($model) {
+                return $model->tanggal->format('d/m/Y');
+            })
+            ->addColumn('detail', function ($model) {
+                return '<a href="' . route('admin.larugi.detail.report', $model->id) . '" class="btn btn-xs btn-primary">Laporan</a>';
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action', 'detail'])->make(true);
+    }
 }

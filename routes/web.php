@@ -32,15 +32,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
 
     Route::resource('neraca', 'NeracaController');
+    Route::get('/neraca/report/search', 'NeracaController@formReport')->name('neraca.report.search');
+    Route::post('/neraca/report/search', 'NeracaController@indexReport');
     Route::resource('neraca/{id}/detail', 'NeracaDetailController', ['names' => 'neraca.detail']);
     Route::get('neraca/{id}/report', 'NeracaDetailController@report')->name('neraca.detail.report');
 
 
     Route::resource('rkap', 'RkapController');
+    Route::get('/rkap/report/search', 'RkapController@formReport')->name('rkap.report.search');
+    Route::post('/rkap/report/search', 'RkapController@indexReport');
     Route::resource('rkap/{id}/detail', 'RkapDetailController', ['names' => 'rkap.detail']);
     Route::get('rkap/{id}/report', 'RkapDetailController@report')->name('rkap.detail.report');
 
     Route::resource('larugi', 'LarugiController');
+    Route::get('/larugi/report/search', 'LarugiController@formReport')->name('larugi.report.search');
+    Route::post('/larugi/report/search', 'LarugiController@indexReport');
     Route::resource('larugi/{id}/detail', 'LarugiDetailController', ['names' => 'larugi.detail']);
     Route::get('larugi/{id}/report', 'LarugiDetailController@report')->name('larugi.detail.report');
 
@@ -61,12 +67,15 @@ Route::group(['prefix' => 'table', 'as' => 'table.', 'middleware' => ['auth']], 
 
     Route::get('neraca', 'NeracaController@dataTable')->name('neraca');
     Route::get('neraca/{id}/detail', 'NeracaDetailController@dataTable')->name('neraca.detail');
+    Route::get('neraca/{bumd}/bulan/{bulan}/periode/{tahun}', 'NeracaController@reportDataTable')->name('neraca.report');
 
     Route::get('larugi', 'LarugiController@dataTable')->name('larugi');
     Route::get('larugi/{id}/detail', 'LarugiDetailController@dataTable')->name('larugi.detail');
+    Route::get('larugi/{bumd}/bulan/{bulan}/periode/{tahun}', 'LarugiController@reportDataTable')->name('larugi.report');
 
     Route::get('rkap', 'RkapController@dataTable')->name('rkap');
     Route::get('rkap/{id}/detail', 'RkapDetailController@dataTable')->name('rkap.detail');
+    Route::get('rkap/{bumd}/periode/{tahun}', 'RkapController@reportDataTable')->name('rkap.report');
 });
 
 /**
