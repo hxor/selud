@@ -127,7 +127,7 @@ class NeracaDetailController extends Controller
     public function report($neracaId)
     {
         $neraca = Neraca::findOrFail($neracaId);
-        $lastNeraca = Neraca::whereMonth('tanggal', Carbon::parse($neraca->tanggal)->subMonth()->month)->first();
+        $lastNeraca = Neraca::where('bumd_id', $neraca->bumd_id)->whereMonth('tanggal', Carbon::parse($neraca->tanggal)->subMonth()->month)->first();
 
         $rekening2 = NeracaDetail::select('rekening2_id')->where('neraca_id', $neracaId)->distinct('rekening2_id')->get();
         return view('pages.admin.neraca-detail.report', compact('rekening2', 'neraca', 'lastNeraca'));

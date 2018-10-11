@@ -127,7 +127,7 @@ class LarugiDetailController extends Controller
     public function report($larugiId)
     {
         $larugi = Larugi::findOrFail($larugiId);
-        $lastLarugi = Larugi::whereMonth('tanggal', Carbon::parse($larugi->tanggal)->subMonth()->month)->first();
+        $lastLarugi = Larugi::where('bumd_id', $larugi->bumd_id)->whereMonth('tanggal', Carbon::parse($larugi->tanggal)->subMonth()->month)->first();
         $rekening2 = LarugiDetail::select('rekening2_id')->where('larugi_id', $larugiId)->distinct('rekening2_id')->get();
         return view('pages.admin.larugi-detail.report', compact('rekening2', 'larugi', 'lastLarugi'));
     }

@@ -127,7 +127,7 @@ class RkapDetailController extends Controller
     public function report($rkapId)
     {
         $rkap = Rkap::findOrFail($rkapId);
-        $lastRkap = Rkap::whereYear('tanggal', Carbon::parse($rkap->tanggal)->subYear()->year)->first();
+        $lastRkap = Rkap::where('bumd_id', $rkap->bumd_id)->whereYear('tanggal', Carbon::parse($rkap->tanggal)->subYear()->year)->first();
         $rekening2 = RkapDetail::select('rekening2_id')->where('rkap_id', $rkapId)->distinct('rekening2_id')->get();
         return view('pages.admin.rkap-detail.report', compact('rekening2', 'rkap', 'lastRkap'));
     }
