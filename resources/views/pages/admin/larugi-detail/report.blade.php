@@ -125,10 +125,10 @@
                                     <b>Laba Rugi Sebelum Pajak</b>
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
-                                    Rp{{ number_format($laba = ($total[0] - $total[1]) + $total[3], '2', ',', '.') }}
+                                    Rp{{ number_format($laba = (($total[0] - $total[1]) - $total[2]) + $total[3], '2', ',', '.') }}
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
-                                    Rp{{ number_format($lastLaba = ($lastTotal[0] - $lastTotal[1]) + $total[3], '2', ',', '.') }}
+                                    Rp{{ number_format($lastLaba = (($lastTotal[0] - $lastTotal[1]) - $lastTotal[2]) + $lastTotal[3], '2', ',', '.') }}
                                 </td>
                             </tr>
                             <tr>
