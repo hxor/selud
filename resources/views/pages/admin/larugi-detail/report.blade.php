@@ -157,7 +157,7 @@
 
                                 </td>
                                 <td style="vertical-align: top;">
-                                    <b>Pajak Penghasilan</b>
+                                    <b>Laba Rugi Setelah Pajak</b>
                                 </td>
                                 <td style="vertical-align: top; text-align: right;">
                                     <?php
